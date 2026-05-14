@@ -1,0 +1,140 @@
+{{!
+    DOT Rwanda — dashboard_learner.mustache
+    Digital Champion / participant dashboard.
+    Data is populated by theme_dotrwanda\output\dashboard_learner renderable.
+}}
+<div class="dot-dashboard dot-dashboard-learner">
+
+    {{! Welcome bar }}
+    <div class="dot-db-welcome">
+        <div class="dot-db-welcome-text">
+            <h1 class="dot-db-greeting">{{greeting}}, {{firstname}}</h1>
+            <p class="dot-db-subline">{{cohort}} &middot; {{province}} &middot; Week {{currentweek}} of {{totalweeks}}</p>
+        </div>
+        <div class="dot-db-actions">
+            {{#resumeurl}}
+            <a href="{{resumeurl}}" class="dot-btn dot-btn-primary">
+                <i class="ti ti-player-play" aria-hidden="true"></i>
+                Continue learning
+            </a>
+            {{/resumeurl}}
+            <a href="{{calendarurl}}" class="dot-btn dot-btn-outline">
+                <i class="ti ti-calendar" aria-hidden="true"></i>
+                My schedule
+            </a>
+        </div>
+    </div>
+
+    {{! Progress hero }}
+    <div class="dot-progress-hero">
+        <div class="dot-ph-left">
+            <div class="dot-ph-module">{{currentmodule}}</div>
+            <div class="dot-ph-hint">{{activitiesleft}} activities remaining</div>
+            <div class="dot-ph-bar">
+                <div class="dot-ph-bar-fill" style="width:{{overallpercent}}%"></div>
+            </div>
+        </div>
+        <div class="dot-ph-right">
+            <div class="dot-ph-pct">{{overallpercent}}%</div>
+            <div class="dot-ph-pct-label">overall progress</div>
+        </div>
+    </div>
+
+    {{! Metric strip }}
+    <div class="dot-metrics">
+        <div class="dot-metric">
+            <div class="dot-metric-label">Modules done</div>
+            <div class="dot-metric-val">{{modulesdone}}</div>
+            <div class="dot-metric-sub dot-up">of {{modulestotal}} total</div>
+        </div>
+        <div class="dot-metric">
+            <div class="dot-metric-label">Assignments due</div>
+            <div class="dot-metric-val">{{assignmentsdue}}</div>
+            <div class="dot-metric-sub {{#assignmentsoverdue}}dot-warn{{/assignmentsoverdue}}">this week</div>
+        </div>
+        <div class="dot-metric">
+            <div class="dot-metric-label">Badges earned</div>
+            <div class="dot-metric-val">{{badgesearned}}</div>
+            <div class="dot-metric-sub dot-up">+{{badgesthismonth}} this month</div>
+        </div>
+        <div class="dot-metric">
+            <div class="dot-metric-label">Group rank</div>
+            <div class="dot-metric-val">#{{grouprank}}</div>
+            <div class="dot-metric-sub">in {{province}}</div>
+        </div>
+    </div>
+
+    {{! Main grid: courses + deadlines }}
+    <div class="dot-db-grid dot-db-grid-3-2">
+
+        {{! My courses }}
+        <div class="dot-card">
+            <div class="dot-card-head">
+                <span class="dot-card-title">
+                    <i class="ti ti-books" aria-hidden="true"></i> My courses
+                </span>
+                <a href="{{allcoursesurl}}" class="dot-card-action">View all</a>
+            </div>
+            {{#courses}}
+            <div class="dot-course-item">
+                <div class="dot-course-icon dot-course-icon-{{colorkey}}">
+                    <i class="ti ti-{{icon}}" aria-hidden="true"></i>
+                </div>
+                <div class="dot-course-info">
+                    <div class="dot-course-name">{{fullname}}</div>
+                    <div class="dot-course-meta">{{statuslabel}}</div>
+                    <div class="dot-prog-bar">
+                        <div class="dot-prog-fill {{#completed}}dot-prog-done{{/completed}}"
+                             style="width:{{progress}}%"></div>
+                    </div>
+                </div>
+                <span class="dot-badge dot-badge-{{badgecolor}}">{{badgelabel}}</span>
+            </div>
+            {{/courses}}
+        </div>
+
+        {{! Deadlines }}
+        <div class="dot-card">
+            <div class="dot-card-head">
+                <span class="dot-card-title">
+                    <i class="ti ti-clock" aria-hidden="true"></i> Upcoming deadlines
+                </span>
+                <a href="{{calendarurl}}" class="dot-card-action">Calendar</a>
+            </div>
+            {{#deadlines}}
+            <div class="dot-deadline-item">
+                <div class="dot-deadline-date">
+                    <div class="dot-deadline-day">{{day}}</div>
+                    <div class="dot-deadline-mon">{{month}}</div>
+                </div>
+                <div class="dot-deadline-info">
+                    <div class="dot-deadline-title">{{title}}</div>
+                    <div class="dot-deadline-sub">{{subtitle}}</div>
+                </div>
+                <span class="dot-badge dot-badge-{{urgency}}">{{urgencylabel}}</span>
+            </div>
+            {{/deadlines}}
+        </div>
+
+    </div>
+
+    {{! Announcements }}
+    <div class="dot-card">
+        <div class="dot-card-head">
+            <span class="dot-card-title">
+                <i class="ti ti-speakerphone" aria-hidden="true"></i> Announcements
+            </span>
+            <a href="{{announcementsurl}}" class="dot-card-action">See all</a>
+        </div>
+        {{#announcements}}
+        <div class="dot-announce-item">
+            <div class="dot-announce-head">
+                <span class="dot-announce-title">{{subject}}</span>
+                <span class="dot-announce-time">{{timeago}}</span>
+            </div>
+            <div class="dot-announce-body">{{summary}}</div>
+        </div>
+        {{/announcements}}
+    </div>
+
+</div>

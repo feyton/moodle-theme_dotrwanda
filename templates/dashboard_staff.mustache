@@ -1,0 +1,121 @@
+{{!
+    DOT Rwanda — dashboard_staff.mustache
+    Programme Officer / DOT staff dashboard.
+    Data populated by theme_dotrwanda\output\dashboard_staff renderable.
+}}
+<div class="dot-dashboard dot-dashboard-staff">
+
+    {{! Welcome bar }}
+    <div class="dot-db-welcome">
+        <div class="dot-db-welcome-text">
+            <h1 class="dot-db-greeting">{{greeting}}, {{firstname}}</h1>
+            <p class="dot-db-subline">{{jobtitle}} &middot; {{zonecontext}} &middot; Cohort {{cohort}}</p>
+        </div>
+        <div class="dot-db-actions">
+            <a href="{{newannouncementurl}}" class="dot-btn dot-btn-primary">
+                <i class="ti ti-plus" aria-hidden="true"></i>
+                New announcement
+            </a>
+            <a href="{{exporturl}}" class="dot-btn dot-btn-outline">
+                <i class="ti ti-file-export" aria-hidden="true"></i>
+                Export report
+            </a>
+            <a href="{{scheduleurl}}" class="dot-btn dot-btn-outline">
+                <i class="ti ti-calendar" aria-hidden="true"></i>
+                Schedule session
+            </a>
+        </div>
+    </div>
+
+    {{! Metric strip }}
+    <div class="dot-metrics">
+        <div class="dot-metric">
+            <div class="dot-metric-label">Active learners</div>
+            <div class="dot-metric-val">{{activelearners}}</div>
+            <div class="dot-metric-sub dot-up">+{{newlearnersmonth}} this month</div>
+        </div>
+        <div class="dot-metric">
+            <div class="dot-metric-label">Avg. completion</div>
+            <div class="dot-metric-val">{{avgcompletion}}%</div>
+            <div class="dot-metric-sub dot-up">{{completionchange}} vs last month</div>
+        </div>
+        <div class="dot-metric">
+            <div class="dot-metric-label">Pending tasks</div>
+            <div class="dot-metric-val">{{pendingtasks}}</div>
+            <div class="dot-metric-sub {{#hasoverdue}}dot-warn{{/hasoverdue}}">{{overduecount}} overdue</div>
+        </div>
+        <div class="dot-metric">
+            <div class="dot-metric-label">Partners active</div>
+            <div class="dot-metric-val">{{activepartners}} / {{totalpartners}}</div>
+            <div class="dot-metric-sub dot-up">All on track</div>
+        </div>
+    </div>
+
+    {{! Two-column grid: zone reach + action items }}
+    <div class="dot-db-grid dot-db-grid-equal">
+
+        {{! Zone reach }}
+        <div class="dot-card">
+            <div class="dot-card-head">
+                <span class="dot-card-title">
+                    <i class="ti ti-map-pin" aria-hidden="true"></i> Reach by zone
+                </span>
+                <a href="{{zonereporturl}}" class="dot-card-action">Full report</a>
+            </div>
+            {{#zones}}
+            <div class="dot-zone-row">
+                <div class="dot-zone-dot" style="background:{{color}}"></div>
+                <div class="dot-zone-name">{{name}}</div>
+                <div class="dot-zone-bar">
+                    <div class="dot-zone-fill" style="width:{{pct}}%;background:{{color}}"></div>
+                </div>
+                <div class="dot-zone-num">{{count}}</div>
+            </div>
+            {{/zones}}
+        </div>
+
+        {{! Action items }}
+        <div class="dot-card">
+            <div class="dot-card-head">
+                <span class="dot-card-title">
+                    <i class="ti ti-checklist" aria-hidden="true"></i> My action items
+                </span>
+                <a href="{{newtaskurl}}" class="dot-card-action">Add task</a>
+            </div>
+            {{#tasks}}
+            <div class="dot-deadline-item">
+                <div class="dot-deadline-date {{#overdue}}dot-deadline-date-red{{/overdue}}">
+                    <div class="dot-deadline-day">{{day}}</div>
+                    <div class="dot-deadline-mon">{{month}}</div>
+                </div>
+                <div class="dot-deadline-info">
+                    <div class="dot-deadline-title">{{title}}</div>
+                    <div class="dot-deadline-sub">{{subtitle}}</div>
+                </div>
+                <span class="dot-badge dot-badge-{{urgency}}">{{urgencylabel}}</span>
+            </div>
+            {{/tasks}}
+        </div>
+
+    </div>
+
+    {{! Announcements }}
+    <div class="dot-card">
+        <div class="dot-card-head">
+            <span class="dot-card-title">
+                <i class="ti ti-speakerphone" aria-hidden="true"></i> Recent announcements
+            </span>
+            <a href="{{newannouncementurl}}" class="dot-card-action">Post new</a>
+        </div>
+        {{#announcements}}
+        <div class="dot-announce-item">
+            <div class="dot-announce-head">
+                <span class="dot-announce-title">{{subject}}</span>
+                <span class="dot-announce-time">{{timeago}} &middot; by {{author}}</span>
+            </div>
+            <div class="dot-announce-body">{{summary}}</div>
+        </div>
+        {{/announcements}}
+    </div>
+
+</div>

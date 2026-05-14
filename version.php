@@ -1,9 +1,8 @@
 <?php
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2026051400; // Today's date
-$plugin->requires  = 2025041400; // Requires Moodle 5.0+
+$plugin->version   = 2026051400;
+$plugin->requires  = 2024042200; // Moodle 4.4+
 $plugin->component = 'theme_dotrwanda';
-$plugin->dependencies = [
-    'theme_boost' => 2025041400
-];
+$plugin->maturity  = MATURITY_STABLE;
+$plugin->release   = '1.0.0';

@@ -1,41 +1,929 @@
-/* Test Variable for DOT Rwanda Blue */
-$dot-blue: #005a9c;
+// ============================================================
+//  DOT Rwanda — post.scss
+//  Layers DOT branding on top of Boost (light + dark handled
+//  by Boost's own theme switcher). No background overrides.
+// ============================================================
 
-/* Change the top navigation bar to DOT Blue */
+
+// -----------------------------------------------------------
+// 1. DESIGN TOKENS
+// -----------------------------------------------------------
+$dot-blue:        #0777AD;
+$dot-blue-dark:   #055a82;
+$dot-blue-light:  #3aa0d4;
+$dot-grey:        #828282;
+
+// -----------------------------------------------------------
+// 2. GLOBAL TYPOGRAPHY — Poppins, controlled weights
+// -----------------------------------------------------------
+html, body, #page, #page-wrapper, .navbar,
+.card, .btn, input, textarea, select, label,
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif !important;
+}
+
+body {
+    font-weight: 400 !important;
+    letter-spacing: -0.01em;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-weight: 600 !important;
+    letter-spacing: -0.02em;
+}
+
+p, li, td, th, label, .form-label, .nav-link {
+    font-weight: 400 !important;
+}
+
+// -----------------------------------------------------------
+// 3. TOP NAVIGATION BAR
+// -----------------------------------------------------------
 .navbar.fixed-top {
-  background-color: $dot-blue !important;
-  border-bottom: 3px solid #ffc107 !important; /* DOT Yellow accent */
+    background-color: $dot-blue !important;
+    border-bottom: none !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+
+    .navbar-brand,
+    .nav-link,
+    .usermenu .nav-link,
+    .navbar-light .navbar-nav .nav-link {
+        color: #ffffff !important;
+        font-weight: 500 !important;
+
+        &:hover { color: rgba(255,255,255,0.8) !important; }
+    }
+
+    .form-control {
+        background: rgba(255,255,255,0.15) !important;
+        border-color: rgba(255,255,255,0.2) !important;
+        color: #ffffff !important;
+
+        &::placeholder { color: rgba(255,255,255,0.6) !important; }
+        &:focus {
+            background: rgba(255,255,255,0.22) !important;
+            box-shadow: none !important;
+        }
+    }
 }
 
-/* Make the text/logo white so it's readable on the blue background */
-.navbar.fixed-top .navbar-brand,
-.navbar.fixed-top .nav-link,
-.navbar-light .navbar-nav .nav-link {
-  color: #ffffff !important;
-}
-
-/* ==========================================
-   GITHUB ACTIONS DEPLOYMENT TEST
-   ========================================== */
-
-/* 1. Change primary buttons to DOT Yellow */
+// -----------------------------------------------------------
+// 4. PRIMARY BUTTONS
+// -----------------------------------------------------------
 .btn-primary {
-  background-color: #ffc107 !important;
-  border-color: #ffc107 !important;
-  color: #000000 !important;
-  font-weight: bold;
+    background-color: $dot-blue !important;
+    border-color: $dot-blue !important;
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    border-radius: 6px;
+    transition: background-color 0.18s ease, box-shadow 0.18s ease;
+
+    &:hover, &:focus {
+        background-color: $dot-blue-dark !important;
+        border-color: $dot-blue-dark !important;
+        box-shadow: 0 0 0 3px rgba(7,119,173,0.22) !important;
+    }
 }
 
-/* 2. Inject a test banner at the top of the entire site */
-body::before {
-  content: "🚀 GitHub Actions Deployment Successful!";
-  display: block;
-  background-color: #28a745; /* Success Green */
-  color: white;
-  text-align: center;
-  padding: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  width: 100%;
-  z-index: 99999;
+.btn-outline-primary {
+    border-color: $dot-blue !important;
+    color: $dot-blue !important;
+
+    &:hover {
+        background-color: $dot-blue !important;
+        color: #ffffff !important;
+    }
+}
+
+// -----------------------------------------------------------
+// 5. LINKS
+// -----------------------------------------------------------
+a:not(.btn):not(.nav-link):not(.navbar-brand):not(.dropdown-item) {
+    color: $dot-blue !important;
+    &:hover { color: $dot-blue-dark !important; }
+}
+
+// -----------------------------------------------------------
+// 6. FORM FOCUS RING
+// -----------------------------------------------------------
+.form-control:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    border-color: $dot-blue !important;
+    box-shadow: 0 0 0 3px rgba(7,119,173,0.18) !important;
+    outline: none !important;
+}
+
+// -----------------------------------------------------------
+// 7. PROGRESS BARS
+// -----------------------------------------------------------
+.progress-bar { background-color: $dot-blue !important; }
+.progress { border-radius: 99px; overflow: hidden; }
+
+// -----------------------------------------------------------
+// 8. BADGES
+// -----------------------------------------------------------
+.badge-primary, .badge.bg-primary {
+    background-color: $dot-blue !important;
+    font-weight: 500 !important;
+    font-size: 0.72rem;
+}
+
+// -----------------------------------------------------------
+// 9. CARDS — hover accent
+// -----------------------------------------------------------
+.card {
+    border-radius: 8px;
+    transition: box-shadow 0.18s ease, border-color 0.18s ease;
+    &:hover { border-color: rgba(7,119,173,0.35) !important; }
+}
+
+// -----------------------------------------------------------
+// 10. SIDEBAR
+// -----------------------------------------------------------
+#nav-drawer .list-group-item {
+    font-weight: 400 !important;
+    font-size: 0.875rem;
+
+    &.active, &:hover {
+        color: $dot-blue !important;
+        border-left: 2px solid $dot-blue;
+    }
+}
+
+// -----------------------------------------------------------
+// 11. TABLES
+// -----------------------------------------------------------
+.table thead th {
+    font-weight: 600 !important;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: $dot-grey;
+}
+.table tbody td { font-weight: 400 !important; font-size: 0.875rem; }
+
+// -----------------------------------------------------------
+// 12. PAGE HEADINGS
+// -----------------------------------------------------------
+#page-header h1, .page-header-headings h1 {
+    font-size: 1.4rem !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.02em;
+}
+
+// -----------------------------------------------------------
+// 13. FOOTER
+// -----------------------------------------------------------
+#page-footer {
+    font-size: 0.8rem;
+    font-weight: 400 !important;
+    a { color: $dot-blue !important; }
+}
+
+// -----------------------------------------------------------
+// 14. CLEAN UP
+// -----------------------------------------------------------
+body::before { display: none !important; }
+
+
+// ============================================================
+//  LOGIN PAGE
+// ============================================================
+.pagelayout-login {
+
+    #page-header, #page-footer, #nav-drawer,
+    .navbar.fixed-top { display: none !important; }
+
+    #page, #page-wrapper, #page-content {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .dot-login-wrapper {
+        display: flex;
+        min-height: 100vh;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    // LEFT: Brand panel
+    .dot-login-brand {
+        position: relative;
+        flex: 0 0 55%;
+        background: linear-gradient(148deg, #05415f 0%, $dot-blue 50%, $dot-blue-light 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 3rem;
+
+        @media (max-width: 900px) { display: none; }
+    }
+
+    .dot-login-brand-inner {
+        position: relative;
+        z-index: 2;
+        max-width: 440px;
+        color: #ffffff;
+    }
+
+    .dot-brand-logo { margin-bottom: 2.25rem; }
+
+    .dot-logo-img {
+        height: 64px;
+        width: auto;
+        filter: brightness(0) invert(1);
+    }
+
+    .dot-logo-text {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+    }
+
+    .dot-logo-dot {
+        font-size: 2.2rem;
+        font-weight: 700 !important;
+        color: #ffffff;
+        letter-spacing: 0.04em;
+    }
+
+    .dot-logo-rwanda {
+        font-size: 1.5rem;
+        font-weight: 300 !important;
+        color: rgba(255,255,255,0.8);
+    }
+
+    .dot-brand-tagline {
+        margin-bottom: 2.25rem;
+
+        h1 {
+            font-size: 1.5rem !important;
+            font-weight: 600 !important;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        p {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.72);
+            line-height: 1.7;
+            font-weight: 300 !important;
+        }
+    }
+
+    .dot-brand-stats {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 1.75rem;
+        padding: 1.25rem 0;
+        border-top: 1px solid rgba(255,255,255,0.2);
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .dot-stat-number {
+        display: block;
+        font-size: 1.75rem;
+        font-weight: 700 !important;
+        color: #ffffff;
+        line-height: 1;
+    }
+
+    .dot-stat-label {
+        display: block;
+        font-size: 0.68rem;
+        color: rgba(255,255,255,0.55);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-top: 4px;
+        font-weight: 400 !important;
+    }
+
+    .dot-brand-partners {
+        font-size: 0.75rem;
+        color: rgba(255,255,255,0.45);
+        font-weight: 400 !important;
+    }
+
+    .dot-separator { margin: 0 8px; color: rgba(255,255,255,0.25); }
+
+    .dot-brand-pattern {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+
+        svg { width: 100%; height: 100%; position: absolute; inset: 0; }
+    }
+
+    // RIGHT: Form panel — uses Boost's own bg/text vars so light/dark works
+    .dot-login-form-panel {
+        flex: 0 0 45%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 2.5rem;
+        overflow-y: auto;
+
+        @media (max-width: 900px) { flex: 1 0 100%; }
+    }
+
+    .dot-login-form-inner {
+        width: 100%;
+        max-width: 380px;
+    }
+
+    .dot-form-header {
+        margin-bottom: 2rem;
+
+        h2 {
+            font-size: 1.5rem !important;
+            font-weight: 600 !important;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            font-size: 0.85rem;
+            font-weight: 400 !important;
+            margin: 0;
+            opacity: 0.6;
+        }
+    }
+
+    // Google button — uses Bootstrap's own surface vars for light/dark compat
+    .dot-google-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 0.7rem 1rem;
+        border: 1px solid var(--bs-border-color, #dee2e6);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500 !important;
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--bs-secondary-bg, #f8f9fa);
+        color: var(--bs-body-color, #212529) !important;
+        text-decoration: none !important;
+        margin-bottom: 1.5rem;
+        transition: background-color 0.18s ease;
+
+        &:hover {
+            background-color: var(--bs-tertiary-bg, #e9ecef) !important;
+            text-decoration: none !important;
+        }
+    }
+
+    .dot-google-icon { width: 18px; height: 18px; flex-shrink: 0; }
+
+    .dot-divider {
+        display: flex;
+        align-items: center;
+        gap: 0.875rem;
+        font-size: 0.78rem;
+        font-weight: 400 !important;
+        margin-bottom: 1.5rem;
+        color: var(--bs-secondary-color, #6c757d);
+
+        &::before, &::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--bs-border-color, #dee2e6);
+        }
+    }
+
+    #login {
+        .form-group label {
+            font-size: 0.83rem;
+            font-weight: 500 !important;
+            margin-bottom: 0.35rem;
+        }
+
+        .form-control {
+            border-radius: 7px !important;
+            font-size: 0.875rem;
+            font-weight: 400 !important;
+            padding: 0.6rem 0.875rem;
+
+            &:focus {
+                border-color: $dot-blue !important;
+                box-shadow: 0 0 0 3px rgba(7,119,173,0.18) !important;
+            }
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 0.7rem;
+            font-size: 0.9rem;
+            font-weight: 600 !important;
+            border-radius: 7px;
+            letter-spacing: 0.01em;
+            margin-top: 0.5rem;
+        }
+
+        .rememberpass label {
+            font-size: 0.8rem;
+            font-weight: 400 !important;
+        }
+    }
+
+    .dot-form-footer {
+        margin-top: 1.25rem;
+        text-align: center;
+
+        a {
+            font-size: 0.82rem;
+            font-weight: 400 !important;
+            color: $dot-blue !important;
+            text-decoration: none;
+
+            &:hover { text-decoration: underline; }
+        }
+    }
+
+} // end .pagelayout-login
+
+// ============================================================
+//  DASHBOARD WIDGETS (inlined — ScssPhp cannot resolve @import)
+// ============================================================
+// ============================================================
+//  DOT Rwanda — _dashboard.scss
+//  Included via post.scss @import
+// ============================================================
+
+$dot-blue:       #0777AD;
+$dot-blue-dark:  #055a82;
+$dot-blue-light: #3aa0d4;
+$dot-grey:       #828282;
+
+// ── Shared dashboard container ───────────────────────────────
+.dot-dashboard {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 0 2rem;
+}
+
+// ── Welcome bar ──────────────────────────────────────────────
+.dot-db-welcome {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.dot-db-greeting {
+    font-size: 1.4rem !important;
+    font-weight: 600 !important;
+    line-height: 1.2;
+    margin: 0 0 4px;
+    letter-spacing: -0.02em;
+}
+
+.dot-db-subline {
+    font-size: 0.82rem;
+    font-weight: 400 !important;
+    margin: 0;
+    opacity: 0.6;
+}
+
+.dot-db-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+// ── Buttons ───────────────────────────────────────────────────
+.dot-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 7px;
+    font-size: 0.83rem;
+    font-weight: 500 !important;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none !important;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.18s ease, border-color 0.18s ease;
+    white-space: nowrap;
+
+    i { font-size: 14px; }
+}
+
+.dot-btn-primary {
+    background-color: $dot-blue;
+    border-color: $dot-blue;
+    color: #ffffff !important;
+
+    &:hover {
+        background-color: $dot-blue-dark !important;
+        border-color: $dot-blue-dark !important;
+        color: #ffffff !important;
+    }
+}
+
+.dot-btn-outline {
+    background-color: transparent;
+    border-color: var(--bs-border-color, #dee2e6);
+    color: var(--bs-body-color, #212529) !important;
+
+    &:hover {
+        background-color: var(--bs-secondary-bg, #f0f0f0) !important;
+    }
+}
+
+// ── Progress hero ─────────────────────────────────────────────
+.dot-progress-hero {
+    background-color: $dot-blue;
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    color: #ffffff;
+    flex-wrap: wrap;
+}
+
+.dot-ph-left { flex: 1; min-width: 200px; }
+
+.dot-ph-module {
+    font-size: 0.95rem;
+    font-weight: 600 !important;
+    margin-bottom: 4px;
+}
+
+.dot-ph-hint {
+    font-size: 0.78rem;
+    opacity: 0.75;
+    font-weight: 400 !important;
+    margin-bottom: 10px;
+}
+
+.dot-ph-bar {
+    height: 5px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.dot-ph-bar-fill {
+    height: 100%;
+    background: #ffffff;
+    border-radius: 99px;
+    transition: width 0.6s ease;
+}
+
+.dot-ph-right { text-align: right; }
+
+.dot-ph-pct {
+    font-size: 2.2rem;
+    font-weight: 700 !important;
+    line-height: 1;
+    color: #ffffff;
+}
+
+.dot-ph-pct-label {
+    font-size: 0.72rem;
+    opacity: 0.7;
+    font-weight: 400 !important;
+    margin-top: 2px;
+}
+
+// ── Metric strip ──────────────────────────────────────────────
+.dot-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.dot-metric {
+    background: var(--bs-secondary-bg, #f8f9fa);
+    border-radius: 8px;
+    padding: 14px 16px;
+}
+
+.dot-metric-label {
+    font-size: 0.7rem;
+    font-weight: 400 !important;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+}
+
+.dot-metric-val {
+    font-size: 1.6rem;
+    font-weight: 600 !important;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.dot-metric-sub {
+    font-size: 0.72rem;
+    font-weight: 400 !important;
+    margin-top: 4px;
+    opacity: 0.65;
+
+    &.dot-up   { color: #1D9E75; opacity: 1; }
+    &.dot-warn { color: #BA7517; opacity: 1; }
+}
+
+// ── Layout grids ──────────────────────────────────────────────
+.dot-db-grid {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 16px;
+
+    &.dot-db-grid-3-2 {
+        grid-template-columns: 3fr 2fr;
+
+        @media (max-width: 768px) { grid-template-columns: 1fr; }
+    }
+
+    &.dot-db-grid-equal {
+        grid-template-columns: 1fr 1fr;
+
+        @media (max-width: 768px) { grid-template-columns: 1fr; }
+    }
+}
+
+// ── Card ──────────────────────────────────────────────────────
+.dot-card {
+    background: var(--bs-body-bg, #ffffff);
+    border: 0.5px solid var(--bs-border-color, #dee2e6);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+
+    &:last-child { margin-bottom: 0; }
+}
+
+.dot-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.dot-card-title {
+    font-size: 0.85rem;
+    font-weight: 600 !important;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    i { font-size: 14px; opacity: 0.7; }
+}
+
+.dot-card-action {
+    font-size: 0.78rem;
+    color: $dot-blue !important;
+    font-weight: 500 !important;
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover { text-decoration: underline; }
+}
+
+// ── Course items ─────────────────────────────────────────────
+.dot-course-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--bs-border-color, #dee2e6);
+
+    &:last-child { border-bottom: none; padding-bottom: 0; }
+}
+
+.dot-course-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+
+    &.dot-course-icon-blue   { background: #E6F1FB; color: #0C447C; }
+    &.dot-course-icon-green  { background: #EAF3DE; color: #27500A; }
+    &.dot-course-icon-amber  { background: #FAEEDA; color: #633806; }
+    &.dot-course-icon-teal   { background: #E1F5EE; color: #085041; }
+}
+
+.dot-course-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.dot-course-name {
+    font-size: 0.82rem;
+    font-weight: 500 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dot-course-meta {
+    font-size: 0.72rem;
+    opacity: 0.6;
+    font-weight: 400 !important;
+    margin-top: 2px;
+}
+
+.dot-prog-bar {
+    height: 3px;
+    background: var(--bs-secondary-bg, #f0f0f0);
+    border-radius: 99px;
+    margin-top: 6px;
+    overflow: hidden;
+}
+
+.dot-prog-fill {
+    height: 100%;
+    background: $dot-blue;
+    border-radius: 99px;
+    transition: width 0.5s ease;
+
+    &.dot-prog-done { background: #1D9E75; }
+}
+
+// ── Badges ────────────────────────────────────────────────────
+.dot-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.68rem;
+    font-weight: 500 !important;
+    white-space: nowrap;
+    flex-shrink: 0;
+
+    &.dot-badge-blue   { background: #E6F1FB; color: #0C447C; }
+    &.dot-badge-green  { background: #EAF3DE; color: #27500A; }
+    &.dot-badge-amber  { background: #FAEEDA; color: #633806; }
+    &.dot-badge-red    { background: #FCEBEB; color: #791F1F; }
+    &.dot-badge-teal   { background: #E1F5EE; color: #085041; }
+}
+
+// ── Deadline / task items ──────────────────────────────────────
+.dot-deadline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 0.5px solid var(--bs-border-color, #dee2e6);
+
+    &:last-child { border-bottom: none; padding-bottom: 0; }
+}
+
+.dot-deadline-date {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #E6F1FB;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    &.dot-deadline-date-red {
+        background: #FCEBEB;
+
+        .dot-deadline-day { color: #791F1F; }
+        .dot-deadline-mon { color: #A32D2D; }
+    }
+}
+
+.dot-deadline-day {
+    font-size: 0.85rem;
+    font-weight: 700 !important;
+    color: #0C447C;
+    line-height: 1;
+}
+
+.dot-deadline-mon {
+    font-size: 0.55rem;
+    color: #185FA5;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 400 !important;
+}
+
+.dot-deadline-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.dot-deadline-title {
+    font-size: 0.82rem;
+    font-weight: 500 !important;
+    line-height: 1.3;
+}
+
+.dot-deadline-sub {
+    font-size: 0.72rem;
+    opacity: 0.6;
+    font-weight: 400 !important;
+    margin-top: 2px;
+}
+
+// ── Announcements ─────────────────────────────────────────────
+.dot-announce-item {
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--bs-border-color, #dee2e6);
+
+    &:last-child { border-bottom: none; padding-bottom: 0; }
+}
+
+.dot-announce-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.dot-announce-title {
+    font-size: 0.82rem;
+    font-weight: 500 !important;
+    line-height: 1.3;
+}
+
+.dot-announce-time {
+    font-size: 0.72rem;
+    opacity: 0.5;
+    font-weight: 400 !important;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.dot-announce-body {
+    font-size: 0.78rem;
+    opacity: 0.7;
+    line-height: 1.55;
+    font-weight: 400 !important;
+}
+
+// ── Zone reach (staff only) ───────────────────────────────────
+.dot-zone-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 0.5px solid var(--bs-border-color, #dee2e6);
+
+    &:last-child { border-bottom: none; padding-bottom: 0; }
+}
+
+.dot-zone-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.dot-zone-name {
+    font-size: 0.82rem;
+    font-weight: 500 !important;
+    flex: 1;
+    min-width: 0;
+}
+
+.dot-zone-bar {
+    width: 80px;
+    height: 4px;
+    background: var(--bs-secondary-bg, #f0f0f0);
+    border-radius: 99px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.dot-zone-fill {
+    height: 100%;
+    border-radius: 99px;
+}
+
+.dot-zone-num {
+    font-size: 0.82rem;
+    font-weight: 600 !important;
+    min-width: 42px;
+    text-align: right;
 }
