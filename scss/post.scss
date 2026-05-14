@@ -1,0 +1,15 @@
+/* Test Variable for DOT Rwanda Blue */
+$dot-blue: #005a9c;
+
+/* Change the top navigation bar to DOT Blue */
+.navbar.fixed-top {
+  background-color: $dot-blue !important;
+  border-bottom: 3px solid #ffc107 !important; /* DOT Yellow accent */
+}
+
+/* Make the text/logo white so it's readable on the blue background */
+.navbar.fixed-top .navbar-brand,
+.navbar.fixed-top .nav-link,
+.navbar-light .navbar-nav .nav-link {
+  color: #ffffff !important;
+}
