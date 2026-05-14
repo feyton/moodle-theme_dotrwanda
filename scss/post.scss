@@ -13,3 +13,29 @@ $dot-blue: #005a9c;
 .navbar-light .navbar-nav .nav-link {
   color: #ffffff !important;
 }
+
+/* ==========================================
+   GITHUB ACTIONS DEPLOYMENT TEST
+   ========================================== */
+
+/* 1. Change primary buttons to DOT Yellow */
+.btn-primary {
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+  color: #000000 !important;
+  font-weight: bold;
+}
+
+/* 2. Inject a test banner at the top of the entire site */
+body::before {
+  content: "🚀 GitHub Actions Deployment Successful!";
+  display: block;
+  background-color: #28a745; /* Success Green */
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  z-index: 99999;
+}

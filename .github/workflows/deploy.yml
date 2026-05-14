@@ -1,0 +1,25 @@
+name: Deploy DOT Rwanda Theme (Self-Hosted)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: 📂 Sync files to Moodle Theme Directory
+        run: |
+          sudo rsync -rvz --delete \
+            --exclude '.git' \
+            --exclude '.github' \
+            ./ /var/www/moodle/public/theme/dotrwanda/
+      - name: 🧹 Purge Moodle Caches via CLI
+        run: |
+          # This safely runs the specific command we whitelisted in visudo
+          sudo -u www-data /usr/bin/php /var/www/moodle/admin/cli/purge_caches.php
